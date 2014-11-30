@@ -11,7 +11,7 @@ String enTekst = "Dette er en test";
 
 ## Flytkontroll
 
-# If else
+### If else
 
 ```java
 int tall = 1
@@ -35,7 +35,7 @@ if (tekst.equals("Stian")) {
 }
 ```
 
-# For-løkke
+### For-løkke
 
 Best å bruke når du vet hvor mange ganger du skal gjenta noe, eller hvis man skal gå igjennom en array.
 
@@ -45,7 +45,7 @@ for (int i = 0; i < 5; i++) {
 }
 ```
 
-# While-løkke
+### While-løkke
 
 Best å bruke når du ikke vet hvor mange ganger noe skal gjentas
 
