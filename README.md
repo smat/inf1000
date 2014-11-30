@@ -8,9 +8,28 @@ int ettTall = 1;
 String enTekst = "Dette er en test";
 ```
 
+## Regnefunksjoner
+
+```java
+int a = 5;
+int b = 7;
+
+int c = a + b // Pluss sammen to tall
+int d = a - b // Trekke fra ett tall
+int e = a * b // Gange sammen to tall
+
+int f = a / b // Dele på et tall. Ved int vil den fjerne alt etter komma
+int g = a % b // Rest etter etter deling
+
+a += b // Er det samme som: a = a + b
+a -= b // Er det samme som a = a - b
+```
+
 ## Flytkontroll
 
 ### If else
+
+Primitiver er `int`, `double`, `boolean` (alle med små forbokstav). `String` er ikke en primitiv.
 
 ```java
 int tall = 1
@@ -42,7 +61,7 @@ Best å bruke når du vet hvor mange ganger du skal gjenta noe, eller hvis man s
 
 ```java
 for (int i = 0; i < 5; i++) {
-  System.out.println("Dette er gang nr " + i);
+  System.out.println("Dette er gang nr " + (i + 1));
 }
 ```
 
@@ -59,13 +78,15 @@ for (int i = 0; i =< 10; i + 2) {
 Best å bruke når du ikke vet hvor mange ganger noe skal gjentas
 
 ```java
-Scanner s = new Scanner(System.in) // Husk "import java.io.Scanner"
+Scanner s = new Scanner(System.in) // Husk "import java.util.Scanner"
 boolean fortsett = true;
 
-while (fortsett) {                 // Fortsetter til "fortsett-variablen blir endret
+while (fortsett) { // Fortsetter til "fortsett-variablen blir endret
   String input = s.nextLine();
-  if (input.equalsIgnoreCase("stop")) {  // Sjekker om input er lik stop, uten å sjekke for store eller små bokstaver
-    fortsett = false;              // Avslutter løkka når brukeren skriver "Stop"
+  // Sjekker om input er lik stop,
+  // uten å sjekke for store eller små bokstaver
+  if (input.equalsIgnoreCase("stop")) {
+    fortsett = false; // Avslutter løkka når brukeren skriver "Stop"
   }
 }
 ```
@@ -76,19 +97,20 @@ while (fortsett) {                 // Fortsetter til "fortsett-variablen blir en
 ## Arrays
 
 ```java
-int[] enListe = new int[6];              // Tom liste med seks plasser
-int[] endaEnListe = new int[] {5, 3, 5}; // Liste med innhold
+int[] enListe = new int[6];     // Tom liste med seks plasser
+int[] endaEnListe = {5, 3, 5};  // Liste med innhold
 
-enList[2] = 6;                           // Lagrer tall i lista
-int tallFraLista = enList[2]             // Henter ut tredje tallet fra lista (begynner på 0)
+enListe[2] = 6;                 // Lagrer tall i lista
+int tallFraLista = enListe[2]   // Henter ut tredje tallet fra lista (begynner på 0)
+int lengde = enListe.length     // Størrelsen på array-et
 ```
 
 ### Løkke for arrays
 
-Vanlig løkke med arrays. `i` er indeksen til hvor lang man er kommet i lista.
+Vanlig løkke med arrays. `i` er indeksen til hvor langt man er kommet i lista.
 
 ```java
-int[] liste = new int[] {2, 54, 4, 5};
+int[] liste = {2, 54, 4, 5};
 
 for (int i = 0; i < liste.length; i++) {
   int talletFraLista = liste[i];
@@ -96,7 +118,7 @@ for (int i = 0; i < liste.length; i++) {
 }
 ```
 
-Forenkla for-løkke. Har får man ikke ut nummeret på plassen, men bare innholdet i lista
+Forenkla for-løkke. Her får man ikke ut nummeret på plassen, men bare innholdet i lista
 
 ```java
 for (int tall : liste) {
@@ -109,10 +131,14 @@ for (int tall : liste) {
 ```java
 ArrayList<String> listeOverStrenger = new ArrayList<String>(); // Lager en ny tom liste
 
-listeOverStrenger.add("Stian");             // Legger til. Gjør at .size() blir en større.
-String innhold = listeOverStrenger.get(0);  // Henter ut innholdet i plass 0
-int antallElementer = listeOverStrenger.size(); // Returnerer hvor mange elementer det er i lista
-listeOverStrenger.remove(0);                // Fjerner et element. Gjør at .size() blir en mindre.
+// Legger til. Gjør at .size() blir en større.
+listeOverStrenger.add("Stian");
+// Henter ut innholdet i plass 0
+String innhold = listeOverStrenger.get(0);
+// Returnerer hvor mange elementer det er i lista
+int antallElementer = listeOverStrenger.size();
+// Fjerner elementet på plass 0. Gjør at .size() blir en mindre.
+listeOverStrenger.remove(0);
 ```
 
 ### Løkke for ArrayList
@@ -143,12 +169,16 @@ for (String ettElement : liste) {
 `Person` som er brukt under er et klassenavn som er funnet på, og kan være navnet på en klasse man lager selv.
 
 ```java
-// En ny hashmap med String som nøkkel og MinKlasse som value/innhold.
+// En ny hashmap med String som nøkkel og Person som value/innhold.
 HashMap<String, Person> map = new HashMap<String, Person>();
 
-map.put("Stian", new Person());  // Legger inn en Person med nøkkel "Stian"
-Person p = map.get("Stian");     // Henter ut igjen objektet
-boolean finnesStian = map.containsKey("Stian");  // Sjekker om det finner en nøkkel som er "Stian"
+Person p = new Person();
+// Legger inn en Person med nøkkel "Stian"
+map.put("Stian", p);
+// Henter ut igjen objektet
+Person p = map.get("Stian");
+// Sjekker om det finner en nøkkel som er "Stian"
+boolean finnesStian = map.containsKey("Stian");
 ```
 
 ### Løkke for HashMap
@@ -156,10 +186,31 @@ boolean finnesStian = map.containsKey("Stian");  // Sjekker om det finner en nø
 ```java
 HashMap<String, Person> map = new HashMap<String, Person>();
 
-for (String key : map.keySet()) { // Lager en liste av alle nøklene og går igjennom dem
-  Person p = map.get(key);        // Henter ut value basert på nøkkelen
+// Lager en liste av alle nøklene og går igjennom dem
+for (String key : map.keySet()) {
+  Person p = map.get(key); // Henter ut value basert på nøkkelen
   // Gjøre noe med person?
 }
 ```
 
 
+## Metoder
+
+### Statiske metoder
+
+Statiske metoder kan alltid kjøres inne i samme klasse.
+
+```java
+
+```
+
+
+### Ikke-statiske metoder
+
+Kan kun kjøres fra andre ikke-statiske metoder i samme klasse, eller på et objekt (eks `enTekstStreng.substring(5, 2)`)
+
+
+```java
+
+
+```
