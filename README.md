@@ -35,9 +35,9 @@ if (tekst.equals("Stian")) {
 }
 ```
 
-# For-løkke
+# For-lÃ¸kke
 
-Best å bruke når du vet hvor mange ganger du skal gjenta noe, eller hvis man skal gå igjennom en array.
+Best Ã¥ bruke nÃ¥r du vet hvor mange ganger du skal gjenta noe, eller hvis man skal gÃ¥ igjennom en array.
 
 ```java
 for (int i = 0; i < 5; i++) {
@@ -45,9 +45,9 @@ for (int i = 0; i < 5; i++) {
 }
 ```
 
-# While-løkke
+# While-lÃ¸kke
 
-Best å bruke når du ikke vet hvor mange ganger noe skal gjentas
+Best Ã¥ bruke nÃ¥r du ikke vet hvor mange ganger noe skal gjentas
 
 ```java
 Scanner s = new Scanner(System.in) // Husk "import java.io.Scanner"
@@ -55,8 +55,8 @@ boolean fortsett = true;
 
 while (fortsett) {                 // Fortsetter til "fortsett-variablen blir endret
   String input = s.nextLine();
-  if (input.equalsIgnoreCase("stop")) {  // Sjekker om input er lik stop, uten å sjekke for store eller små bokstaver
-    fortsett = false;              // Avslutter løkka når brukeren skriver "Stop"
+  if (input.equalsIgnoreCase("stop")) {  // Sjekker om input er lik stop, uten Ã¥ sjekke for store eller smÃ¥ bokstaver
+    fortsett = false;              // Avslutter lÃ¸kka nÃ¥r brukeren skriver "Stop"
   }
 }
 ```
