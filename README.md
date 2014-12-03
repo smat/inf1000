@@ -31,6 +31,8 @@ a -= b // Er det samme som a = a - b
 
 Primitiver er `int`, `double`, `boolean` (alle med små forbokstav). `String` er ikke en primitiv.
 
+Man kan ha alle funksjoner som returnerer `boolean` inne i parentesen til if-en.
+
 ```java
 int tall = 1
 
@@ -91,9 +93,6 @@ while (fortsett) { // Fortsetter til "fortsett-variablen blir endret
 }
 ```
 
-## String
-
-
 ## Arrays
 
 ```java
@@ -101,8 +100,8 @@ int[] enListe = new int[6];     // Tom liste med seks plasser
 int[] endaEnListe = {5, 3, 5};  // Liste med innhold
 
 enListe[2] = 6;                 // Lagrer tall i lista
-int tallFraLista = enListe[2]   // Henter ut tredje tallet fra lista (begynner på 0)
-int lengde = enListe.length     // Størrelsen på array-et
+int tallFraLista = enListe[2];  // Henter ut tredje tallet fra lista (begynner på 0)
+int lengde = enListe.length;    // Størrelsen på array-et
 ```
 
 ### Løkke for arrays
@@ -139,6 +138,8 @@ String innhold = listeOverStrenger.get(0);
 int antallElementer = listeOverStrenger.size();
 // Fjerner elementet på plass 0. Gjør at .size() blir en mindre.
 listeOverStrenger.remove(0);
+// Overskriver et element i lista
+listeOverStrenger.set(0, "Karoline");
 ```
 
 ### Løkke for ArrayList
@@ -176,7 +177,7 @@ Person p = new Person();
 // Legger inn en Person med nøkkel "Stian"
 map.put("Stian", p);
 // Henter ut igjen objektet
-Person p = map.get("Stian");
+Person sammePerson = map.get("Stian");
 // Sjekker om det finner en nøkkel som er "Stian"
 boolean finnesStian = map.containsKey("Stian");
 ```
@@ -189,7 +190,7 @@ HashMap<String, Person> map = new HashMap<String, Person>();
 // Lager en liste av alle nøklene og går igjennom dem
 for (String key : map.keySet()) {
   Person p = map.get(key); // Henter ut value basert på nøkkelen
-  // Gjøre noe med person?
+  // Gjøre noe med person. Egen kode
 }
 ```
 
@@ -198,19 +199,72 @@ for (String key : map.keySet()) {
 
 ### Statiske metoder
 
-Statiske metoder kan alltid kjøres inne i samme klasse.
+Statiske metoder kan alltid kjøres inne i samme klasse, uten å kjøre den på noe.
 
 ```java
+class StatiskMetodeEksempel {
+
+  public static void main(String[] args) {
+    skrivUtNoeGoy("Stian");
+    skrivUtNoeGoy("Karoline");
+  }
+
+  public static void skrivUtNoeGoy(String navn) {
+    System.out.println("Dette er goy, eller hva, " + navn);
+  }
+
+}
 
 ```
 
 
-### Ikke-statiske metoder
+### Ikke-statiske metoder og konstruktør
 
 Kan kun kjøres fra andre ikke-statiske metoder i samme klasse, eller på et objekt (eks `enTekstStreng.substring(5, 2)`)
 
 
 ```java
+class Person {
 
+  private String navn;
 
+  public static void main(String[] args) {
+    Person s = new Person("Stian");
+    Person k = new Person("Karoline");
+    s.siHei();  // Må kjøres på et objekt, siden main-metoden er statisk
+    hadet();    // Kan kjøres alene, siden hadet er static
+
+    // Skriver ut:
+    // Hei, Stian
+    // Hei, Karoline
+    // Stian sier hei til Karoline
+    s.siHeiTilNoen(k)
+  }
+
+  // Konstruktør:
+  Person(String navn) {
+    this.navn = navn; // this.navn referer til navn deklarert direkte i klassen
+  }
+
+  void siHeiToGanger() {
+    siHei();       // Disse to linjene betyr det samme
+    this.siHei();
+    hadet();       // Ikke-statiske metoder kan kjøre statiske metoder direkte (men ikke omvendt)
+  }
+
+  void siHei() {
+    System.out.println("Hei, " + navn);
+  }
+
+  void siHeiTilNoen(Person p) {
+    siHei();    // Kjører siHei-metoden til objektet den ble kjørt på
+    p.siHei();  // Kjører siHei-metoden til objektet som ble sendt inn
+    System.out.println(this.navn + " sier hei til " + p.navn);
+  }
+
+  static void hadet() {
+    System.out.println("Hadet");
+  }
+
+}
 ```
